@@ -26,6 +26,10 @@ const routes = [
     path: '/logout',
     component: () => import('@/components/views/Logout.vue')
   },
+  {
+    path: '/jobs/create',
+    component: () => import('@/components/jobs/Create.vue')
+  },
 ]
 
 const router = createRouter({
