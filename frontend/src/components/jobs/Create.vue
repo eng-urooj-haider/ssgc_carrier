@@ -104,11 +104,11 @@
       </div> -->
 
       <!-- Cities Section -->
+      <!-- Cities Section -->
       <div class="mb-4">
-        <label class="block text-sm font-medium text-gray-700 mb-2">
-          Cities / Locations <Mandatory />
-        </label>
+        <label class="block text-sm font-medium text-gray-700 mb-2"> Cities / Locations </label>
 
+        <!-- Dynamic Inputs -->
         <div v-for="(city, index) in cities" :key="index" class="flex items-center space-x-2 mb-2">
           <div class="relative flex-1">
             <input
@@ -116,16 +116,14 @@
               type="text"
               minlength="3"
               maxlength="30"
-              class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md shadow-sm"
               :placeholder="'City / Location #' + (index + 1)"
             />
-            <span class="absolute left-3 top-3 text-gray-500">
-              <i class="fa-solid fa-building"></i>
-            </span>
           </div>
 
-          <!-- Remove button -->
+          <!-- Remove Button -->
           <button
+            v-if="cities.length > 1"
             type="button"
             @click="removeCity(index)"
             class="px-2 py-1 bg-red-500 text-white rounded"
@@ -134,11 +132,11 @@
           </button>
         </div>
 
-        <!-- Add City Button -->
+        <!-- Add Button -->
         <button
           type="button"
           @click="addCity"
-          class="mt-2 px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700"
+          class="mt-2 px-4 py-2 bg-indigo-600 text-white rounded"
         >
           + Add City
         </button>
@@ -222,6 +220,22 @@
         </div>
       </div>
 
+      <!-- Qulification -->
+        <div class="mb-4">
+        <label for="qualification" class="form-label">Qualification &amp; Experience</label>
+        <textarea ref="qualification" id="qualification" v-model="qualification" class="form-textarea"></textarea>
+      </div>
+
+      <div class="mb-4">
+        <label for="skills" class="form-label">Skills</label>
+        <textarea ref="skills" id="skills" v-model="skills" class="form-textarea"></textarea>
+      </div>
+
+      <div class="mb-4">
+        <label for="responsibilities" class="form-label">Responsibilities</label>
+        <textarea ref="responsibilities" id="responsibilities" v-model="responsibilities" class="form-textarea"></textarea>
+      </div>
+
       <!-- Submit Button -->
       <div class="mt-4 flex space-x-3">
         <ButtonPrimary> <i class="fa-regular fa-square-plus mr-2"></i> Add New Job </ButtonPrimary>
@@ -232,53 +246,18 @@
 </template>
 
 <script setup>
-// import { ref } from 'vue';
+import { ref } from 'vue'
 
-// export default {
-//   setup() {
-//     const jobCode = ref('');
-//     const title = ref('');
-//     const city1 = ref('');
-//     const city2 = ref('');
-//     const city3 = ref('');
-//     const publicationDate = ref('');
-//     const deadline = ref('');
-//     const age = ref('');
-//     const jobType = ref('');
-//     const profiles = ref([
-//       { id: 1, name: 'Full-time' },
-//       { id: 2, name: 'Part-time' },
-//       { id: 3, name: 'Contract' },
-//     ]);
+const cities = ref(['']) // one input by default
 
-//     const submitForm = () => {
-//       // handle form submission logic here
-//       console.log({
-//         jobCode,
-//         title,
-//         city1,
-//         city2,
-//         city3,
-//         publicationDate,
-//         deadline,
-//         age,
-//         jobType,
-//       });
-//     };
+function addCity() {
+  cities.value.push('') // add new empty input
+  console.log(cities.value)
+}
 
-//     return {
-//       jobCode,
-//       title,
-//       city1,
-//       city2,
-//       city3,
-//       publicationDate,
-//       deadline,
-//       age,
-//       jobType,
-//       profiles,
-//       submitForm,
-//     };
-//   },
-// };
+function removeCity(index) {
+  if (cities.value.length > 1) {
+    cities.value.splice(index, 1)
+  }
+}
 </script>
